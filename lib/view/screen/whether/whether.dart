@@ -7,30 +7,48 @@ class WhetherMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WeatherApiController whethercontroller = Get.put(WeatherApiController());
+    WhetherApiController apiController = Get.put(WhetherApiController());
+    // WeatherApiController whethercontroller = Get.put(WeatherApiController());
     return Scaffold(
-      body: 
-        
-       Container(
-            child: GetBuilder<WeatherApiController>(
-              init: WeatherApiController(),
-              
-              builder: (controller) {
-                return ListView.builder(
-                    itemCount: controller.getData()!.daily!.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          Text(
-                            controller.getData()!.daily![index].temp
-                                .toString(),
-                          )
-                        ],
-                      );
-                    });
-              }
-            ))
-    
+      body: Obx(() {
+        if (apiController.isloding.value) {
+          Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Center(
+              child: Text(apiController
+                  .whetherModels.value.daily![index].humidity
+                  .toString()),
+            );
+          },
+        );
+      }),
+
+      // Obx(
+      //   () {
+      //     if (apiController.isloding.value) {
+      //       Center(
+      //         child: CircularProgressIndicator(),
+      //       );
+      //     }
+      //     return ListView.builder(
+      //         itemCount: apiController.whetherModels.value.daily!.length,
+      //         itemBuilder: (context, index) {
+      //           return Column(
+      //             children: [
+      //               Text(
+      //                 apiController.whetherModels.value.daily![index].humidity
+      //                     .toString(),
+      //               )
+      //             ],
+      //           );
+      //         });
+      //   },
+      // ),
     );
   }
 }
