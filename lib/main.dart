@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:edaya_app_test/model/dataModel/data_model.dart';
 import 'package:edaya_app_test/view/screen/home_screen/homescreen.dart';
+import 'package:edaya_app_test/view/screen/login/login.dart';
 import 'package:edaya_app_test/view/screen/onbording/onbording.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,8 +17,6 @@ Future<void> main() async {
   Hive.init(directory.path);
   Hive.registerAdapter(DataModelAdapter());
   await Hive.openBox<DataModel>(boxName);
-
-  // await Hive.initFlutter();
   runApp(MyApp());
 }
 
@@ -34,9 +33,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home:
-          //Onbording(),
-          storage.read('isLogin') ? HomeScreen() : Onbording(),
+      home: 
+     storage.read('isLogin') ? HomeScreen() : Onbording(),
     );
   }
 }

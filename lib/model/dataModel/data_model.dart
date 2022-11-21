@@ -9,11 +9,14 @@ class DataModel {
   String secondName;
   @HiveField(2)
   String email;
+  @HiveField(3)
+  int? id;
 
   DataModel({
     required this.email,
     required this.firstName,
     required this.secondName,
+    this.id,
   });
 }
 

@@ -4,15 +4,15 @@ import 'package:edaya_app_test/model/whethermodel/whether_model.dart';
 import 'package:get/get.dart';
 
 class WhetherApiController extends GetxController {
-  final Rx<WhetherModels> whetherModels = WhetherModels().obs;
+  final Rx<ApiWhether> whetherModels = ApiWhether().obs;
   RxBool isloding = true.obs;
 
-  Future<WhetherModels?> getWetherController() async {
+  Future<ApiWhether?> getWetherController() async {
     try {
       var data = await WhetherService.getWether();
       isloding.value = false;
       print(data!.current!.sunrise);
-      return whetherModels.value;
+      return data;
     } on DioError catch (e) {
       isloding.value = false;
       print(e.error);

@@ -20,19 +20,22 @@ class DataModelAdapter extends TypeAdapter<DataModel> {
       email: fields[2] as String,
       firstName: fields[0] as String,
       secondName: fields[1] as String,
+      id: fields[3] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, DataModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.firstName)
       ..writeByte(1)
       ..write(obj.secondName)
       ..writeByte(2)
-      ..write(obj.email);
+      ..write(obj.email)
+      ..writeByte(3)
+      ..write(obj.id);
   }
 
   @override

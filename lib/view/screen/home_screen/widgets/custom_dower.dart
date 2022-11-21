@@ -8,10 +8,10 @@ import 'package:get_storage/get_storage.dart';
 class CustomDrower extends StatelessWidget {
   const CustomDrower({
     Key? key,
-    required this.storage,
+ required this.storage,
   }) : super(key: key);
 
-  final GetStorage storage;
+final GetStorage storage;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CustomDrower extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: green,
+              color: blue,
               borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10)),
@@ -50,7 +50,7 @@ class CustomDrower extends StatelessWidget {
             },
             leading: const Icon(
               Icons.logout,
-              color: green,
+              color: blue,
             ),
             title: Text(
               "Logout",

@@ -7,48 +7,25 @@ class WhetherMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WhetherApiController apiController = Get.put(WhetherApiController());
-    // WeatherApiController whethercontroller = Get.put(WeatherApiController());
+   WhetherApiController apiController = Get.put(WhetherApiController());
+
     return Scaffold(
       body: Obx(() {
         if (apiController.isloding.value) {
-          Center(
+          const Center(
             child: CircularProgressIndicator(),
           );
         }
         return ListView.builder(
-          itemCount: 10,
+          itemCount: apiController.whetherModels.value.daily!.length,
           itemBuilder: (context, index) {
             return Center(
-              child: Text(apiController
-                  .whetherModels.value.daily![index].humidity
+              child: Text(apiController.whetherModels.value.daily![index].sunset
                   .toString()),
             );
           },
         );
       }),
-
-      // Obx(
-      //   () {
-      //     if (apiController.isloding.value) {
-      //       Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     }
-      //     return ListView.builder(
-      //         itemCount: apiController.whetherModels.value.daily!.length,
-      //         itemBuilder: (context, index) {
-      //           return Column(
-      //             children: [
-      //               Text(
-      //                 apiController.whetherModels.value.daily![index].humidity
-      //                     .toString(),
-      //               )
-      //             ],
-      //           );
-      //         });
-      //   },
-      // ),
     );
   }
 }

@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-
 import 'package:edaya_app_test/controller/controller/userdata/userdata.dart';
 import 'package:edaya_app_test/model/dataModel/data_model.dart';
 import 'package:edaya_app_test/view/screen/login/widgets/custom_button.dart';
@@ -19,6 +18,12 @@ class AddMembers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserDataController controller = Get.put(UserDataController());
+
+    final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+    final kwidth = SizedBox(width: width * .01);
+
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -38,120 +43,90 @@ class AddMembers extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 350,
-              width: double.infinity,
-              child: Card(
-                color: wamwhite,
-                child: Form(
-                  key: fonmkey,
-                  child: GetBuilder<UserDataController>(
-                      init: UserDataController(),
-                      dispose: (_) {
-                        firstName.dispose();
-                        lastName.dispose();
-                        email.dispose();
-                      },
-                      builder: (controler) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              firstnameForm(),
-                              lastnameFprm(),
-                              emailForm(),
-                              CustomButton(
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text("Save Details"),
-                                        actions: [
-                                          ElevatedButton(
-                                            onPressed: () => Get.back(),
-                                            child: Text("Cancel"),
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              DataModel dataModel = DataModel(
-                                                  email: email.text,
-                                                  firstName: firstName.text,
-                                                  secondName: lastName.text);
-                                              if (fonmkey.currentState!
-                                                  .validate()) {
-                                                Get.back();
-                                                Get.back();
-                                                controller
-                                                    .getAddData(dataModel);
-                                                Get.snackbar(
-                                                    "User", "Details Added",
-                                                    icon: const Icon(
-                                                        Icons.thumb_up),
-                                                    snackPosition:
-                                                        SnackPosition.BOTTOM);
-                                                controller.getData();
-                                              }
-                                            },
-                                            child: Text("Save"),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  title: "submit"),
-                              ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      minimumSize: Size(double.infinity, 45)),
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text("Save Details"),
-                                        actions: [
-                                          ElevatedButton(
-                                            onPressed: () => Get.back(),
-                                            child: Text("Cancel"),
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              DataModel dataModel = DataModel(
-                                                  email: email.text,
-                                                  firstName: firstName.text,
-                                                  secondName: lastName.text);
-                                              if (fonmkey.currentState!
-                                                  .validate()) {
-                                                Get.back();
-                                                Get.back();
-                                                controller
-                                                    .getAddData(dataModel);
-                                                Get.snackbar(
-                                                    "User", "Details Added",
-                                                    icon: const Icon(
-                                                        Icons.thumb_up),
-                                                    snackPosition:
-                                                        SnackPosition.BOTTOM);
-                                                controller.getData();
-                                              }
-                                            },
-                                            child: Text("Save"),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  child: Text("submit")),
-                            ],
-                          ),
-                        );
-                      }),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 200,
+                decoration: BoxDecoration(
+                    image:
+                        DecorationImage(image: AssetImage('assets/add.jpg'))),
+              ),
+              SizedBox(
+                height: height * .45,
+                width: double.infinity,
+                child: Card(
+                  color: wamwhite,
+                  child: Form(
+                    key: fonmkey,
+                    child: GetBuilder<UserDataController>(
+                        init: UserDataController(),
+                        dispose: (_) {
+                          firstName.dispose();
+                          lastName.dispose();
+                          email.dispose();
+                        },
+                        builder: (controler) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                firstnameForm(),
+                                lastnameFprm(),
+                                emailForm(),
+                                CustomButton(
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: Text("Save Details"),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Get.back(),
+                                              child: Text("Cancel"),
+                                            ),
+                                            SizedBox(
+                                              width: 100,
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                DataModel dataModel = DataModel(
+                                                    email: email.text,
+                                                    firstName: firstName.text,
+                                                    secondName: lastName.text);
+                                                if (fonmkey.currentState!
+                                                    .validate()) {
+                                                  Get.back();
+                                                  Get.back();
+                                                  controller
+                                                      .getAddData(dataModel);
+                                                  Get.snackbar(
+                                                      "User", "Details Added",
+                                                      icon: const Icon(
+                                                          Icons.thumb_up),
+                                                      snackPosition:
+                                                          SnackPosition.BOTTOM);
+                                                  controller.getData();
+                                                }
+                                              },
+                                              child: Text("Save"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    title: "submit"),
+                              ],
+                            ),
+                          );
+                        }),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

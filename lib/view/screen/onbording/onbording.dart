@@ -8,6 +8,11 @@ class Onbording extends StatelessWidget {
   final _controller = OnbordingController();
   @override
   Widget build(BuildContext context) {
+      final size = MediaQuery.of(context).size;
+    final height = size.height;
+    final width = size.width;
+    final height10 = SizedBox(height: height * .01);
+
     return Scaffold(
       backgroundColor: white,
       body: Stack(
@@ -27,28 +32,14 @@ class Onbording extends StatelessWidget {
                         ),
                         fit: BoxFit.contain),
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
+                  child:const Padding(
+                    padding:  EdgeInsets.only(
                       top: 100,
                       left: 40,
                       right: 10,
                       bottom: 10,
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        // Text( _controller.onbordingList[index].title,),
-
-                        // SizedBox(
-                        //     width: 300,
-                        //     child:Text(_controller
-                        //             .onbordingList[index].discriptions,)
-
-                        //      ),
-                      ],
-                    ),
+                   
                   ),
                 );
               }),
@@ -76,7 +67,14 @@ class Onbording extends StatelessWidget {
           Positioned(
               bottom: 5,
               right: 10,
-              child: ElevatedButton(onPressed: () {
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(backgroundColor: blue,
+                     minimumSize: Size(40, height * .04),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+                ),
+                onPressed: () {
                 _controller.forwerdAction();
               }, child: Obx(() {
                 return Text(

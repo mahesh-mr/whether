@@ -1,4 +1,3 @@
-import 'package:edaya_app_test/controller/service/storage.dart';
 import 'package:edaya_app_test/view/screen/home_screen/homescreen.dart';
 import 'package:edaya_app_test/view/screen/login/widgets/custom_button.dart';
 import 'package:edaya_app_test/view/screen/login/widgets/custom_textform.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
 
@@ -54,15 +54,10 @@ class LoginScreen extends StatelessWidget {
                         onPressed: () async {
                           bool isValid = _fomkey.currentState!.validate();
                           if (isValid) {
-                            //   final usernames=  UserStorage.getUsername(_emailController.text, _passwordController.text);
-
                             ('sucess');
-                            final staus = storage.write("isLogin", true);
-                            final username = storage.write(
-                                "username", _emailController.text);
-                            final pass = storage.write(
-                                "password", _passwordController.text);
-                            //  (usernames);
+                            storage.write("isLogin", true);
+                            storage.write("username", _emailController.text);
+                          
                             Get.offAll(HomeScreen());
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
